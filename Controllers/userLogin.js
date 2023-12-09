@@ -2,6 +2,7 @@ const User = require("../Models/user");
 const bcrypt = require("bcrypt");
 
 module.exports = (req, res, next) => {
+
   User.findOne({ email: req.body.email })
     .then((user) => {
 

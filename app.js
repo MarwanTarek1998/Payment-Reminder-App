@@ -1,6 +1,10 @@
 // Modules
 const express = require('express')
+const passport = require('passport')
+const session = require('express-session')
+const LocalStrategy = require('passport-local').Strategy
 const cors = require('cors')
+const authenticate = require('./Authentication/PassportAuth.js')
 
 // Configurations
 require('dotenv').config()
@@ -21,6 +25,14 @@ connectToDB(process.env.DBUrl)
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use(cors())
+
+//Middleware
+app.use(session({
+    secret : process.env.SESSION_SECRET
+}))
+
+app.use(passport.initialize())  // init passport on every route call
+app.use(passport.session())    //allow passport to use "express-session"
 
 /** Routes */
 app.use('/userRegisteration' , userRegisteration)
