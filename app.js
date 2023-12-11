@@ -5,6 +5,7 @@ const session = require('express-session')
 const LocalStrategy = require('passport-local').Strategy
 const cors = require('cors')
 const authenticate = require('./Authentication/PassportAuth.js')
+const checkAuthenticated = require('./Authentication/checkAuthenticated.js')
 
 // Configurations
 require('dotenv').config()

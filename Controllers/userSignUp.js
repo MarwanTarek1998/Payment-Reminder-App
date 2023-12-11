@@ -1,5 +1,6 @@
 const User = require('../Models/user')
 const bcrypt = require('bcrypt')
+const {sendActivationMail} = require("../Email Sender/emailController")
 
 module.exports = (req , res , next) => {
     bcrypt.hash(req.body.password , 10)
@@ -12,6 +13,7 @@ module.exports = (req , res , next) => {
             res.statusCode = 200
             res.setHeader("content-type" , "application/json")
             res.json({"description" : "User has been registered successfully"})
+            sendActivationMail(user.email)
         })
         .catch(error => {
             res.statusCode = 400
