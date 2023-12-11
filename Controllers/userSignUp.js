@@ -13,7 +13,7 @@ module.exports = (req , res , next) => {
             res.statusCode = 200
             res.setHeader("content-type" , "application/json")
             res.json({"description" : "User has been registered successfully"})
-            sendActivationMail(user.email)
+            sendActivationMail(user.email , user._id)
         })
         .catch(error => {
             res.statusCode = 400
