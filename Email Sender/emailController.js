@@ -10,6 +10,9 @@ const transporter = nodemailr.createTransport({
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
   },
+  tls: {
+    rejectUnauthorized: false,
+  }
 });
 
 const sendActivationMail = (email , userId) => {
