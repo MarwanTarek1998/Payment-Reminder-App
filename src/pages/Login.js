@@ -42,7 +42,7 @@ export const Login = () => {
     }
 
     return (
-        <Box>
+        <Box sx={{height : '100vh' , backgroundColor: '#373773'}}>
 
             <Box 
                 sx={{

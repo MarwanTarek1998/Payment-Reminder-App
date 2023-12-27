@@ -7,6 +7,8 @@ import {Login} from './pages/Login'
 import {ActivationPage} from './pages/ActivationPage'
 import {ActivationSuccessfullyPage} from './pages/ActivationSuccessfullyPage'
 import {DashboardPage} from './pages/DashboardPage'
+import { InvoicesTabs } from './components/InvoicesTabs';
+import { AddClientForm } from './components/AddClientForm';
 // import {ReactQueryDevtools} from 'react-query/devtools'
 
 const theme = createTheme({
@@ -39,7 +41,10 @@ function App() {
                   <Route path='/sign-up' element={<Signup/>}/>
                   <Route path='/activation-page' element={<ActivationPage/>}/>
                   <Route path='/activation-successfully/:userId' element={<ActivationSuccessfullyPage/>}/>
-                  <Route path='/dashboard' element={<DashboardPage/>}/>
+                  <Route path='/dashboard' element={<DashboardPage/>}>
+                    <Route path='clinet-invoices/:id' element={<InvoicesTabs />} />
+                  </Route>
+                  <Route path='/test' element={<AddClientForm />} />
                 </Routes>
 
             </div>

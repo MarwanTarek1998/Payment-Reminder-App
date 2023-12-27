@@ -1,12 +1,9 @@
 import { Container , Box, Avatar, Typography, Grid, TextField, Button , Paper , FormHelperText , Snackbar , Alert } from '@mui/material'
 import Logo from '../images/logo.png'
 import { validate } from 'email-validator'
-import { useState , forwardRef } from 'react'
+import { useState } from 'react'
 import { useAddUser } from '../hooks/useAddUser'
 import { useNavigate } from 'react-router-dom'
-
-
-
 
 export const Signup = () => {
 
@@ -24,20 +21,11 @@ export const Signup = () => {
     const navigate = useNavigate()
 
 
-    const {mutate : signupUser , isSuccess , isError , error} = useAddUser();
+    const {mutate : signupUser , isSuccess , isError , error} = useAddUser(()=>{
+        setOpen(true)
+    });
     
-    
-
-    const handleClose = () => {
-        
-        setOpen(false)
-        
-    }
-
-    const handleSumbit = (event) => {
-
-        event.preventDefault()
-
+    const validateForm = ()=>{
         firstName.length >= 2 ? setFirstNameFlag(false) : setFirstNameFlag(true)
 
         lastName.length >= 2 ? setLastNameFlag(false) : setLastNameFlag(true)
@@ -45,6 +33,18 @@ export const Signup = () => {
         validate(email) ? setEmailFlag(false) : setEmailFlag(true)
 
         password.length >= 6 ? setPasswordFlag(false) : setPasswordFlag(true)
+    }
+
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    const handleSumbit = (event) => {
+
+        event.preventDefault()
+
+        validateForm()
 
         if (firstName.length >= 2 && lastName.length >= 2 && validate(email) && password.length >= 6) {
             
@@ -56,10 +56,6 @@ export const Signup = () => {
             }
 
             signupUser(user)
-            
-            if (error){
-                setOpen(true)
-            }
         }
     }
 
@@ -68,11 +64,8 @@ export const Signup = () => {
         navigate('/activation-page')
     }
 
-    
-
-
     return (
-        <Box>
+        <Box sx={{height : '100vh' , backgroundColor: '#373773'}}>
 
             <Box 
                 sx={{
@@ -202,7 +195,7 @@ export const Signup = () => {
             </Container>
 
             <Snackbar 
-                open={open} 
+                open={isError && open} 
                 autoHideDuration={3000}
                 onClose={handleClose}
                 anchorOrigin={{
