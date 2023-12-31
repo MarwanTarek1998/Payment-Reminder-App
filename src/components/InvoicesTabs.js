@@ -3,8 +3,12 @@ import { Box, Button, IconButton, Tab, Tooltip } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 import DescriptionIcon from "@mui/icons-material/Description";
+import { useOutletContext } from "react-router-dom";
 
 export const InvoicesTabs = () => {
+
+  const openInvoiceForm = useOutletContext()
+
   const [value, setValue] = React.useState("1");
 
   const handleChange = (event, newValue) => {
@@ -37,6 +41,7 @@ export const InvoicesTabs = () => {
             color="secondary"
             variant="contained"
             sx={{ width: "64px", height: "64px", borderRadius: "50%" , position:'absolute' , bottom:'5%' , right:'5%' }}
+            onClick={openInvoiceForm}
           >
             <DescriptionIcon sx={{ fontSize: "2rem" }} />
           </Button>

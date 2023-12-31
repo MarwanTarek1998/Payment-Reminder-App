@@ -1,4 +1,4 @@
-import { Container , Box , TextField , Typography , Avatar , Link , Grid, Button , Paper, FormHelperText } from "@mui/material"
+import { Container , Box , TextField , Typography , Avatar , Link , Grid, Button , Paper, FormHelperText, Snackbar, Alert } from "@mui/material"
 import Logo from '../images/logo.png'
 import { validate } from "email-validator"
 import { useState } from "react"
@@ -12,11 +12,13 @@ export const Login = () => {
     const [password, setPassword] = useState("")
     const [emailFlag, setEmailFlag] = useState(false)
     const [passwordFlag, setPasswordFlag] = useState(false)
+    const [open, setOpen] = useState(false)
 
     const navigate = useNavigate()
 
-
-    const {mutate : loginUser , isSuccess , isError} = useLoginUser()
+    const {mutate : loginUser , isSuccess , isError , error} = useLoginUser(()=>{
+        setOpen(true)
+    })
 
     const handleSumbit = (event) => {
 
@@ -35,6 +37,10 @@ export const Login = () => {
 
             loginUser(user) 
         }
+    }
+
+    const handleClose = () => {
+        setOpen(false)
     }
 
     if (isSuccess) {
@@ -152,6 +158,26 @@ export const Login = () => {
                 </Paper>
 
             </Container>
+
+            <Snackbar 
+                open={isError && open} 
+                autoHideDuration={3000}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                
+            >
+
+                <Alert 
+                    severity='error'
+                    elevation={20}
+                >
+                    Invalid Credentials
+                </Alert>
+
+            </Snackbar>
 
         </Box>
         

@@ -1,8 +1,6 @@
 import { useMutation } from "react-query"
 import axios from "axios"
 
-
-
 export const useAddUser = (onError) => {
 
     const  addUser =  (user) => {

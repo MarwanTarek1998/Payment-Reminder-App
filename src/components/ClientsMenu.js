@@ -1,27 +1,23 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import PersonIcon from "@mui/icons-material/Person";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
-import { Button, Toolbar } from "@mui/material";
+import {
+  Button,
+  Toolbar,
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonIcon from "@mui/icons-material/Person";
+
 import { Link } from "react-router-dom";
 
-export const ClientsMenu = ({openClientForm}) => {
-
-  const [mobileOpen, setMobileOpen] = useState(false);
+export const ClientsMenu = ({ mobileOpen ,closeClientMenu ,openClientForm }) => {
   const drawerWidth = 300;
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   const clients = [
     {
@@ -44,7 +40,12 @@ export const ClientsMenu = ({openClientForm}) => {
   const drawer = (
     <Box
       component="div"
-      sx={{ display: "flex", flexDirection: "column", height: "100%" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        position: "relative",
+      }}
     >
       <Toolbar />
       <List sx={{ paddingTop: "46px" }}>
@@ -90,7 +91,7 @@ export const ClientsMenu = ({openClientForm}) => {
       <Drawer
         variant="temporary"
         open={mobileOpen}
-        onClose={handleDrawerToggle}
+        onClose={closeClientMenu}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
@@ -120,6 +121,8 @@ export const ClientsMenu = ({openClientForm}) => {
       >
         {drawer}
       </Drawer>
+
+      
     </Box>
   );
 };
