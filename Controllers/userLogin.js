@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
         bcrypt
           .compare(req.body.password , user.password)
           .then((same) => {
-            if (same) {
+            if (same) { 
               res.statusCode = 200;
               res.setHeader("content-type", "application/json");
               res.json(user);
