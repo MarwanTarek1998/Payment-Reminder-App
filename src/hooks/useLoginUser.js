@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 export const useLoginUser = (onError) => {
 
     const loginUser = (user) => {
-        return axios.post('http://localhost:5000/userRegisteration/login' , user)
+        return axios.post('http://localhost:5000/userRegisteration/login' , user , {withCredentials : true})
     }
 
     return useMutation(loginUser , {

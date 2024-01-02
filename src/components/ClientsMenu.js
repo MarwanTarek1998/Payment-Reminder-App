@@ -20,21 +20,7 @@ export const ClientsMenu = ({ mobileOpen ,closeClientMenu ,openClientForm }) => 
   const drawerWidth = 300;
 
   const clients = [
-    {
-      _id: "1",
-      firstName: "Marwan",
-      lastName: "Tareak",
-    },
-    {
-      _id: "2",
-      firstName: "Mohamed",
-      lastName: "Tareak",
-    },
-    {
-      _id: "3",
-      firstName: "Ahmed",
-      lastName: "Tareak",
-    },
+    
   ];
 
   const drawer = (
@@ -49,7 +35,7 @@ export const ClientsMenu = ({ mobileOpen ,closeClientMenu ,openClientForm }) => 
     >
       <Toolbar />
       <List sx={{ paddingTop: "46px" }}>
-        {clients.map((client) => (
+        {clients?.map((client) => (
           <Link
             to={`./clinet-invoices/${client._id}`}
             style={{ width: "100%", textDecoration: "none" }}

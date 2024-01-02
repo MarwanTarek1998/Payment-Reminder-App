@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { validate } from "email-validator";
+import { useAddClient } from "../hooks/useAddClient";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
 
 export const AddClientForm = ({ open, closeClientForm }) => {
@@ -26,20 +27,42 @@ export const AddClientForm = ({ open, closeClientForm }) => {
   const [firstNameFlag, setFirstNameFlag] = useState(false);
   const [lastNameFlag, setLastNameFlag] = useState(false);
 
+const {mutate: addClient , isSuccess} = useAddClient()
+
   const validateForm = () => {
     firstName.length >= 2 ? setFirstNameFlag(false) : setFirstNameFlag(true);
 
     lastName.length >= 2 ? setLastNameFlag(false) : setLastNameFlag(true);
 
     validate(email) ? setEmailFlag(false) : setEmailFlag(true);
+
   };
 
-  const handleAddClient = () => {
-    validateForm();
+  const handleAddClient = (event) => {
+    event.preventDefault()
+
+    validateForm()
+
+    
+    
+    if (firstName.length >= 2 && lastName.length >= 2 && validate(email)){
+
+      const client = {
+        firstName : firstName,
+        lastName : lastName,
+        email : email
+      }
+      
+      addClient(client)
+    }
+
   };
+
+
+  
 
   return (
-    <Dialog open={open} onClose={closeClientForm}>
+    <Dialog open={open} onClose={closeClientForm} component='form'>
       <DialogTitle sx={{fontWeight: '700' , fontSize: '1.5rem'}} >Add Client</DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
@@ -109,16 +132,16 @@ export const AddClientForm = ({ open, closeClientForm }) => {
         <Button
           variant="contained"
           color="error"
-          
           onClick={closeClientForm}
         >
           cancel
         </Button>
         <Button
+          type="submit"
           variant="contained"
           color="secondary"
-      
           sx={{marginRight: '8px'}}
+          onClick={(e) => handleAddClient(e)}
         >
           Add
         </Button>

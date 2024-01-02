@@ -4,7 +4,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 export const ActivationPage = () => {
     return (
-        <Box>
+        <Box sx={{height : '100vh' , backgroundColor: '#373773'}}>
             
             <Box>
                 <Avatar 
