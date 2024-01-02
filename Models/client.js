@@ -14,9 +14,21 @@ const clientSchema = new Schema({
         type: String,
         required: [true , "Please provide an Email"],
         unique: true
-    }
+    },
+    invoices: [
+        {
+            userID : {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            },
+            invoiceID : {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Invoice'
+            }
+        }
+    ]
 })
 
-const Client = mongoose.model('client' , clientSchema)
+const Client = mongoose.model('clients' , clientSchema)
 
 module.exports = Client

@@ -24,7 +24,12 @@ const userSchema = new Schema({
         type : Boolean,
         default : false
     },
-    clients : [String]
+    clients : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'clients' 
+        }
+    ]
 })
 
 userSchema.plugin(uniqueValidator)
