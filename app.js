@@ -12,6 +12,7 @@ require('dotenv').config()
 
 // Routes
 const userRegisteration = require('./Routes/userRegisteration.js')
+const clients = require('./Routes/clients.js')
 
 // Functions
 const {connectToDB} = require('./Database/DBController.js')
@@ -25,7 +26,10 @@ connectToDB(process.env.DBUrl)
 //parse incomin requests
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
-app.use(cors())
+app.use(cors({
+    origin : 'http://localhost:3000',
+    credentials: true
+}))
 
 //Middleware
 app.use(session({
@@ -37,6 +41,7 @@ app.use(passport.session())    //allow passport to use "express-session"
 
 /** Routes */
 app.use('/userRegisteration' , userRegisteration)
+app.use('/clients' , clients)
 
 // Run the server
 app.listen(process.env.PORT , () =>{

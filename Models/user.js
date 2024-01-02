@@ -23,7 +23,8 @@ const userSchema = new Schema({
     isActive:{
         type : Boolean,
         default : false
-    }
+    },
+    clients : [String]
 })
 
 userSchema.plugin(uniqueValidator)
