@@ -20,10 +20,6 @@ export const DashboardPage = () => {
     
   },[])
 
-  
-
-
-
   const handleOpenClientMenu = () => {
     setOpenClientMenu(!openClientMenu);
   };

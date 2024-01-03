@@ -13,8 +13,6 @@ import {
 import React, { useState } from "react";
 import { validate } from "email-validator";
 import { useAddClient } from "../hooks/useAddClient";
-import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
-
 
 export const AddClientForm = ({ open, closeClientForm }) => {
   const [email, setEmail] = useState("");
