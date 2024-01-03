@@ -7,6 +7,10 @@ module.exports = (req , res , next) =>{
     User.findById(userID)
     .populate('clients')
     .then(user =>{
-        console.log(user.clients)
+        res.statusCode = 200
+        res.setHeader('content-type' , 'application/json')
+        res.json(user.clients)
     })
+
+
 }

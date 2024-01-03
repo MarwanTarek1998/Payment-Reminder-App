@@ -19,12 +19,16 @@ module.exports = (req , res , next) => {
                     });
 
                     if (index !== -1){
-                        console.log('client is already exist in your network')
+                        res.statusCode = 400
+                        res.setHeader('content-type' , 'aplication/json')
+                        res.json({"errMsg" : 'This client is already in your clients'})
                     }else{
                         user.clients.push(client._id)
                         user.save()
                         .then((user) => {
-                            console.log(user)
+                            res.statusCode = 200
+                            res.setHeader('content-type' , "apllication/json")
+                            res.json({"successMsg" : "The client has been added successfully"})
                         })
                         
                     }
@@ -35,7 +39,9 @@ module.exports = (req , res , next) => {
                         user.clients.push(client._id)
                         user.save()
                         .then((user) => {
-                            console.log(user)
+                            res.statusCode = 200
+                            res.setHeader('content-type' , "apllication/json")
+                            res.json({"successMsg" : "The client has been added successfully"})
                         })
 
                     })            
