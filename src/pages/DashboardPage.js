@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavBar } from "../components/NavBar.js";
 import { ClientsMenu } from "../components/ClientsMenu";
 import { Box, Button } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { AddClientForm } from "../components/AddClientForm.js";
 import { AddInvoiceForm } from "../components/AddInvoiceForm.js";
-
+import { useGetClients } from "../hooks/useGetClients.js";
 import PersonIcon from "@mui/icons-material/Person";
 
 export const DashboardPage = () => {
   const [openClientMenu, setOpenClientMenu] = useState(false);
   const [openClientForm, setOpenClientForm] = useState(false);
   const [openInvoiceForm, setOpenInvoiceForm] = useState(false);
+
+  const {data , refetch} = useGetClients()
+
+  useEffect(() => {
+    refetch()
+    
+  },[])
+
+  
+
+
 
   const handleOpenClientMenu = () => {
     setOpenClientMenu(!openClientMenu);
@@ -34,6 +45,7 @@ export const DashboardPage = () => {
           mobileOpen={openClientMenu}
           closeClientMenu={handleOpenClientMenu}
           openClientForm={handleOpenClientForm}
+          clients={data?.data}
         />
         <Outlet context={handleOpenInvoiceForm} />
       </Box>

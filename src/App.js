@@ -11,7 +11,7 @@ import { ActivationSuccessfullyPage } from "./pages/ActivationSuccessfullyPage";
 import { DashboardPage } from "./pages/DashboardPage";
 import { InvoicesTabs } from "./components/InvoicesTabs";
 import { AddInvoiceForm } from "./components/AddInvoiceForm";
-// import {ReactQueryDevtools} from 'react-query/devtools'
+import {ReactQueryDevtools} from 'react-query/devtools'
 
 const theme = createTheme({
   palette: {
@@ -52,7 +52,7 @@ function App() {
         </LocalizationProvider>
       </ThemeProvider>
 
-      {/* <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/> */}
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
     </QueryClientProvider>
   );
 }

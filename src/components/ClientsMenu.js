@@ -16,12 +16,9 @@ import PersonIcon from "@mui/icons-material/Person";
 
 import { Link } from "react-router-dom";
 
-export const ClientsMenu = ({ mobileOpen ,closeClientMenu ,openClientForm }) => {
+export const ClientsMenu = ({ mobileOpen ,closeClientMenu ,openClientForm , clients }) => {
   const drawerWidth = 300;
 
-  const clients = [
-    
-  ];
 
   const drawer = (
     <Box
