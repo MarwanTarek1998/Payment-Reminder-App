@@ -10,6 +10,11 @@ const invoiceSchema = new Schema({
         type: Number,
         required : [true , 'Please provide the invoice amount']
     },
+    state: {
+        type: String,
+        required : [true],
+        default : 'Active'
+    },
     dueDate:{
         type : String,
         required: [true , 'Please provide the invoice due date']

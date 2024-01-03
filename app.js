@@ -13,6 +13,7 @@ require('dotenv').config()
 // Routes
 const userRegisteration = require('./Routes/userRegisteration.js')
 const clients = require('./Routes/clients.js')
+const invoices = require('./Routes/invoices.js')
 
 // Functions
 const {connectToDB} = require('./Database/DBController.js')
@@ -42,6 +43,7 @@ app.use(passport.session())    //allow passport to use "express-session"
 /** Routes */
 app.use('/userRegisteration' , userRegisteration)
 app.use('/clients' , clients)
+app.use('/invoices' , invoices)
 
 // Run the server
 app.listen(process.env.PORT , () =>{
