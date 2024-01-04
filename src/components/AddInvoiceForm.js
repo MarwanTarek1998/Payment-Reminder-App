@@ -10,13 +10,14 @@ import {
   Snackbar,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useAddInvoice } from "../hooks/useAddInvoice";
+import { useUpdateInvoice } from "../hooks/useUpdateInvoice";
 import { useParams } from "react-router-dom";
 import dayjs from 'dayjs';
 
-export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
+export const AddInvoiceForm = ({ open, closeInvoiceForm, invoice }) => {
   // Client Id
   const { id } = useParams();
 
@@ -29,6 +30,13 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
   const [dateFlag, setDateFlag] = useState(false);
 
   const [invoiceAddedSuccessfuly, setInvoiceAddedSuccessfuly] = useState(false);
+
+  useEffect(() =>{
+
+    setSubject(invoice?.subject)
+    setAmount(invoice?.amount)
+
+  },[invoice])
 
   const handleAddInviceNotification = ()=>{
     setInvoiceAddedSuccessfuly(false)
@@ -46,7 +54,14 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
     clearInputs()
   }
 
+  const onUpdateSuccess = () => {
+    closeInvoiceForm()
+    setInvoiceAddedSuccessfuly(true)
+    clearInputs()
+  }
+
   const { mutate: addInvoice } = useAddInvoice(onSuccess);
+  const {mutate : updateInvoice} = useUpdateInvoice(onUpdateSuccess)
 
   const validateForm = () => {
     subject.length < 1 ? setSubjectFlag(true) : setSubjectFlag(false);
@@ -72,6 +87,26 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
       addInvoice(invoiceObj);
     }
   };
+
+  const handleEditInvoice = (e) => {
+    e.preventDefault();
+
+    validateForm();
+
+    if (!amountFlag && !dateFlag && !subjectFlag) {
+      
+      const invoiceObj = {
+        invoiceId: invoice._id,
+        invoiceInfo: {
+          subject: subject,
+          amount: amount,
+          dueDate: dueDate,
+        },
+      };
+
+      updateInvoice(invoiceObj)
+    }
+  }
 
   return (
     <>
@@ -148,15 +183,27 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
           <Button variant="contained" color="error" onClick={closeInvoiceForm}>
             cancel
           </Button>
-          <Button
-            type="submit"
-            variant="contained"
-            color="secondary"
-            sx={{ marginRight: "8px" }}
-            onClick={(e) => handleAddInvoice(e)}
-          >
-            Add
-          </Button>
+          {invoice == null ? 
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="secondary"
+                        sx={{ marginRight: "8px" }}
+                        onClick={(e) => handleAddInvoice(e)}
+                      >
+                        Add
+                      </Button> 
+                  :
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="secondary"
+                      sx={{ marginRight: "8px" }}
+                      onClick={(e) => handleEditInvoice(e)}
+                    >
+                      Edit
+                    </Button>
+          }
         </DialogActions>
       </Dialog>
 

@@ -1,9 +1,14 @@
-import {Box, Card , CardContent ,Chip,Typography } from '@mui/material'
+import {Box, Card , CardContent ,Chip,Typography, Tooltip , Button } from '@mui/material'
 import React from 'react'
-
 import DescriptionIcon from "@mui/icons-material/Description";
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { useOutletContext } from 'react-router-dom';
 
-export const InvoiceCard = ({invoice}) => {
+export const InvoiceCard = ({invoice , editInvoice}) => {
+
+  const [handleOpenInvoiceForm] = useOutletContext()
+
+
   return (
     <Card variant="outlined" sx={{marginBottom: '16px'}}>
               <CardContent sx={{ display: "flex", alignItems: "center" }}>
@@ -15,9 +20,30 @@ export const InvoiceCard = ({invoice}) => {
                   }}
                 />
                 <Box sx={{ flexGrow: "1" }}>
-                  <Typography variant="h4" sx={{ marginBottom: "8px" }}>
-                    {invoice.invoiceID.subject}
-                  </Typography>
+
+                  <Box sx={{display: 'flex' , alignItems: 'center' , justifyContent: 'space-between'}}>
+
+                    <Typography variant="h4" sx={{ marginBottom: "8px" }}>
+                      {invoice.invoiceID.subject}
+                    </Typography>
+
+                    {invoice.invoiceID.state === "Active" && 
+                      <Tooltip title= 'Edit' placement='left'>
+                        <Button 
+                          color = 'secondary'
+                          variant='contained'
+                          sx={{minWidth: '0px'}}
+                          onClick={() => editInvoice(invoice.invoiceID)}
+                          >
+
+                            <ModeEditOutlineIcon />
+
+                        </Button>
+                      </Tooltip>
+                    }
+
+                  </Box>
+
                   <Box
                     sx={{
                       display: "flex",

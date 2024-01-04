@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Backdrop, Box, Button, Tab, Tooltip , CircularProgress } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-
 import DescriptionIcon from "@mui/icons-material/Description";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useGetInvoices } from "../hooks/useGetInvoices";
 import { InvoiceCard } from "./invoiceCard";
+import { AddInvoiceForm } from "./AddInvoiceForm";
 
 export const InvoicesTabs = () => {
   const { id } = useParams();
 
-  const openInvoiceForm = useOutletContext();
+  const [handleOpenInvoiceForm , openInvoiceForm] = useOutletContext();
 
   const [value, setValue] = useState("1");
   const [activeInvoices, setActiveInvoices] = useState([]);
   const [closedInvoices, setCloseInvoices] = useState([]);
+  const [invoice, setInvoice] = useState(null);
 
   const { data: invoices, isLoading } = useGetInvoices(id);
 
@@ -30,6 +31,16 @@ export const InvoicesTabs = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const editInvoice = (invoice) => {
+    setInvoice(invoice)
+    handleOpenInvoiceForm()
+  }
+
+  const closeInvoiceForm = () => {
+    handleOpenInvoiceForm()
+    setInvoice(null)
+  }
 
   if (isLoading) {
     return <Backdrop
@@ -51,6 +62,13 @@ export const InvoicesTabs = () => {
         position: "relative",
       }}
     >
+
+      <AddInvoiceForm
+        open={openInvoiceForm}
+        closeInvoiceForm = {closeInvoiceForm}
+        invoice={invoice}
+        />
+
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -61,7 +79,7 @@ export const InvoicesTabs = () => {
 
         <TabPanel sx={{ paddingX: "0px" }} value="1">
           {activeInvoices?.map((invoice) => (
-            <InvoiceCard invoice={invoice} />
+            <InvoiceCard invoice={invoice} editInvoice = {editInvoice}/>
           ))}
         </TabPanel>
         
@@ -83,7 +101,7 @@ export const InvoicesTabs = () => {
               bottom: "5%",
               right: "5%",
             }}
-            onClick={openInvoiceForm}
+            onClick={handleOpenInvoiceForm}
           >
             <DescriptionIcon sx={{ fontSize: "2rem" }} />
           </Button>

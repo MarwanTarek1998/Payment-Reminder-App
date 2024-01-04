@@ -43,17 +43,18 @@ export const DashboardPage = () => {
           openClientForm={handleOpenClientForm}
           clients={data?.data}
         />
-        <Outlet context={handleOpenInvoiceForm} />
+        <Outlet context={[handleOpenInvoiceForm , openInvoiceForm]} />
       </Box>
 
       <AddClientForm
         open={openClientForm}
         closeClientForm={handleOpenClientForm}
       />
-      <AddInvoiceForm
+
+      {/* <AddInvoiceForm
         open={openInvoiceForm}
         closeInvoiceForm={handleOpenInvoiceForm}
-      />
+      /> */}
 
       <Button
         color="primary"
