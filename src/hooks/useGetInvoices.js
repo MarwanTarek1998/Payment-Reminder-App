@@ -8,7 +8,7 @@ export const useGetInvoices = (clientID) =>{
         return axios.get(`http://localhost:5000/invoices/getInvoices/${clientID}` , {withCredentials: true})
     }
 
-    return useQuery('invoices' , getInvoices , {
+    return useQuery(['invoices' , clientID] , getInvoices , {
         refetchInterval: 2000,
         refetchIntervalInBackground: true
     })

@@ -26,6 +26,11 @@ export const AddClientForm = ({ open, closeClientForm }) => {
   const [clientAddedSuccessfully, setClientAddedSuccessfully] = useState(false)
 
 
+  const clearInputs =()=>{
+    setEmail("")
+    setFirstName("")
+    setlastName("")
+  }
 
   const handleClientExistClose = () =>{
     setClientExist(false)
@@ -39,6 +44,7 @@ export const AddClientForm = ({ open, closeClientForm }) => {
   const onSuccess = () => {
     closeClientForm()
     setClientAddedSuccessfully(true)
+    clearInputs()
   }
 
   //  if the error occur when add client

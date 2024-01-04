@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useAddInvoice } from "../hooks/useAddInvoice";
 import { useParams } from "react-router-dom";
+import dayjs from 'dayjs';
 
 export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
   // Client Id
@@ -33,9 +34,16 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm }) => {
     setInvoiceAddedSuccessfuly(false)
   }
 
+  const clearInputs = ()=>{
+    setSubject("")
+    setAmount("")
+    setDueDate(null)
+  }
+  
   const onSuccess =()=>{
     closeInvoiceForm()
     setInvoiceAddedSuccessfuly(true)
+    clearInputs()
   }
 
   const { mutate: addInvoice } = useAddInvoice(onSuccess);
