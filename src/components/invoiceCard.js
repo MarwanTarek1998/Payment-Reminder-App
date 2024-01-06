@@ -11,7 +11,7 @@ export const InvoiceCard = ({invoice , editInvoice}) => {
 
   return (
     <Card variant="outlined" sx={{marginBottom: '16px'}}>
-              <CardContent sx={{ display: "flex", alignItems: "center" }}>
+              <CardContent sx={{ display: "flex", alignItems: "center" , padding:'24px 24px 16px 24px' }}>
                 <DescriptionIcon
                   sx={{
                     fontSize: "3rem",
@@ -49,16 +49,17 @@ export const InvoiceCard = ({invoice , editInvoice}) => {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
+                      flexWrap : 'wrap',
                     }}
                   >
                     
-                    <Typography variant="h6"><Chip label="Amount" color='primary'  /> : {invoice.invoiceID.amount} $</Typography>
+                    <Typography variant="h6" sx={{marginBottom : '8px'}}><Chip label="Amount" color='primary'  /> : {invoice.invoiceID.amount} $</Typography>
 
-                    <Typography sx={{ color: invoice.invoiceID.state == 'Active' ? "#4caf50" : '#ef5350', fontWeight: "700" }}>
+                    <Typography sx={{ color: invoice.invoiceID.state == 'Active' ? "#4caf50" : '#ef5350', fontWeight: "700" , marginBottom: '8px' }}>
                         <Chip label="Status" sx={{fontWeight : 500}} color='primary'/> : {invoice.invoiceID.state}
                     </Typography>
 
-                    <Typography><Chip label="Due Date" color='primary'/> : {invoice.invoiceID.dueDate}</Typography>
+                    <Typography sx={{marginBottom : '8px'}}><Chip label="Due Date" color='primary'/> : {invoice.invoiceID.dueDate}</Typography>
                   </Box>
                 </Box>
               </CardContent>

@@ -60,6 +60,7 @@ export const InvoicesTabs = () => {
         height: "calc(100vh - 144px)",
         backgroundColor: "#fff",
         position: "relative",
+        overflowY : 'scroll'
       }}
     >
 
@@ -97,7 +98,7 @@ export const InvoicesTabs = () => {
               width: "64px",
               height: "64px",
               borderRadius: "50%",
-              position: "absolute",
+              position: "fixed",
               bottom: "5%",
               right: "5%",
             }}
