@@ -1,4 +1,9 @@
 const nodemailr = require("nodemailer");
+const Handlebars = require('handlebars')
+const { promisify } = require('util');
+const fs = require('fs');
+
+const readFile = promisify(fs.readFile);
 
 const transporter = nodemailr.createTransport({
   service: "gmail",
@@ -15,15 +20,27 @@ const transporter = nodemailr.createTransport({
   }
 });
 
-const sendActivationMail = (email , userId) => {
+Handlebars.registerHelper('link' , function(baseUrl , id , text) {
+  let url = Handlebars.escapeExpression(baseUrl)
+  let userId = Handlebars.escapeExpression(id)
+  let buttonName = Handlebars.escapeExpression(text)
 
-    console.log({email})
+  return new Handlebars.SafeString("<a href='" + url + userId + "' style='padding: 8px 16px; font-weight: 700; background-color: #00bbb4; color: white; border: 0; border-radius: 4px; cursor: pointer; text-decoration: none;'>" + buttonName + "</a>")
+})
 
-    var mailOptions = {
+const sendActivationMail = async (email , userId) => {
+
+    let html = await readFile('D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Activation_Template.html' , 'utf-8')
+
+    let template = Handlebars.compile(html)
+
+    let htmlToSend = template({id : userId})
+
+    let mailOptions = {
         from: process.env.MAIL_USERNAME,
         to: email,
         subject: "Payment Reminder App - Activation Mail",
-        html: "<body style='background-color: #373873; margin: auto; color: white; padding: 24px; max-width: 550px;'><div><img src='https://res.cloudinary.com/defkl7fpy/image/upload/v1702228688/Payment%20Reminder%20App/logo_y7invg.png'alt=''style='width: 100px;'/><table style='width : 100%'><tbody><tr><td style='text-align: center;'><img src='https://res.cloudinary.com/defkl7fpy/image/upload/v1702228648/Payment%20Reminder%20App/7626666_pww6op.png'alt=''style='width: 100px; margin-bottom: 20px;'/></td></tr><tr><td style='text-align: center;'><h2>Successful Registeration</h2></td></tr><tr><td style='text-align: center;'><p style='font-size: 18px; color: white;'>Please click the below button to activate your account, thanks...</p></td></tr><tr><td style='text-align: center;'><a href='http://localhost:3000/activation-successfully/" + userId + "' style='padding: 8px 16px; font-weight: 700; background-color: #00bbb4; color: white; border: 0; border-radius: 4px; cursor: pointer; text-decoration: none;'>Activate My Account</a></td></tr></tbody></table></div></body>"
+        html: htmlToSend
     };
 
     transporter.sendMail(mailOptions , (error , info)=> {
@@ -33,7 +50,6 @@ const sendActivationMail = (email , userId) => {
         else{
             console.log("Activation Email sent successfully")
         }
-
     })
 }
 
