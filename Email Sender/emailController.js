@@ -30,7 +30,7 @@ Handlebars.registerHelper('link' , function(baseUrl , id , text) {
 
 const sendActivationMail = async (email , userId) => {
 
-    let html = await readFile('F:\Electrical\Node-js\payment-reminder\back-end\Email Templates/Activation_Template.html' , 'utf-8')
+    let html = await readFile('D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Activation_Template.html' , 'utf-8')
 
     let template = Handlebars.compile(html)
 
@@ -53,14 +53,13 @@ const sendActivationMail = async (email , userId) => {
     })
 }
 
-
 const sendInvoiceEmail = async (invoice) => {
 
-  // let html = await readFile("F:/Electrical/Node-js/payment-reminder/back-end/Email Templates/Invoice_Template" , 'utf-8')
+  let html = await readFile("D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Invoice_Template.html" , 'utf-8')
 
-  // let template = handlebars.compile(html)
+  let template = Handlebars.compile(html)
 
-  let x = {
+  let data = {
       userName : invoice.userName , 
       invoiceSubject : invoice.invoiceDetails.subject,
       invoiceAmount : invoice.invoiceDetails.amount,
@@ -68,31 +67,22 @@ const sendInvoiceEmail = async (invoice) => {
       id : invoice.invoiceDetails._id
   }
 
-  console.log(x)
+  let htmlToSend = template(data)
 
+  let mailOption = {
+      from : process.env.MAIL_USERNAME,
+      to: invoice.clientEmail,
+      subject: "Payment reminder - A new invoice has been added",
+      html: htmlToSend
+  }
 
-  // let htmlToSend = template({
-  //     userName : invoice.userName , 
-  //     invoiceSubject : invoice.invoiceDetails.subject,
-  //     invoiceAmount : invoice.invoiceDetails.amount,
-  //     invoiceDuedate : invoice.invoiceDetails.dueDate,
-  //     id : invoice.invoiceDetails._id
-  // })
-
-  // let mailOption = {
-  //     from : process.env.MAIL_USERNAME,
-  //     to: invoice.clientEmail,
-  //     subject: "Payment reminder - A new invoice has been added",
-  //     html: htmlToSend
-  // }
-
-  // transporter.sendMail(mailOption , (err , info) => {
-  //     if (err){
-  //         console.log(err)
-  //     }else{
-  //         console.log("New invoice sent successfully")
-  //     }
-  // })
+  transporter.sendMail(mailOption , (err , info) => {
+      if (err){
+          console.log(err)
+      }else{
+          console.log("New invoice sent successfully")
+      }
+  })
 
 }
 
