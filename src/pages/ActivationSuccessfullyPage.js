@@ -17,18 +17,20 @@ export const ActivationSuccessfullyPage =  () => {
     return (
         <Stack 
             spacing={2} 
-            direction='row'
+            direction='column'
             sx={{
                 height: '100vh',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'white'
+                color: 'white',
+                backgroundColor : 'primary.main',
+                textAlign: 'center'
             }}
         >
             <CheckCircleOutlineIcon 
                 sx={{
-                    width: 45 , 
-                    height: 45 , 
+                    width: 100 , 
+                    height: 100 , 
                     color: 'secondary.main'
                     }}
             />
