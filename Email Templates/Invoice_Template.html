@@ -1,0 +1,67 @@
+<body
+    style="
+    background-color: #373873;
+    margin: auto;
+    color: white;
+    padding: 24px;
+    max-width: 550px;
+    "
+>
+    <div>
+        
+        <img
+        src="https://res.cloudinary.com/defkl7fpy/image/upload/v1702228688/Payment%20Reminder%20App/logo_y7invg.png"
+        alt=""
+        style="width: 100px; margin-bottom: 40px"
+        />
+        
+
+        <table style="width: 100%;">
+
+            <tbody>
+                <tr>
+                    <td>
+                        <h2>Hey, the user {{userName}} added a new invoice</h2>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <h3 style="margin: 0 0 15px 0;">Invoice details :</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p style="margin: 0 0 8px 0; font-size: 18px;">Subject : {{invoiceSubject}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="margin: 0 0 8px 0; font-size: 18px;">Amount : {{invoiceAmount}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p style="margin: 0 0 30px 0; font-size: 18px;">Duedate : {{invoiceDuedate}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center;">
+                        <p style="font-size: 22px; margin: 0 0 20px 0;">
+                            If you want to pay it, click on the pay button
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center;">
+                        {{link "http://localhost:3000/pay-invoice" id "Pay it" }}
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
