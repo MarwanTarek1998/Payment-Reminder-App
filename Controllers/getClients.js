@@ -1,5 +1,3 @@
-const mongoose = require('mongoose')
-const Client = require('../Models/client')
 const User = require('../Models/user')
 
 module.exports = (req , res , next) =>{

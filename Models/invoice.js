@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const invoiceSchema = new Schema({
+    clientEmail:{
+        type: String,
+        required : true
+    },
     subject:{
         type: String,
         required : [true , 'Please provide the invoice subject']

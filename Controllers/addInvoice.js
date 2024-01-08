@@ -3,13 +3,12 @@ const Client = require('../Models/client')
 const {sendInvoiceEmail} = require('../Email Sender/emailController')
 
 module.exports = (req , res ,next)=>{
-    const clientID = req.body.clientID
     const userID = req.user._id
     const userName = req.user.firstName + " " + req.user.lastName
     
-    Invoice.create(req.body.invoice)
+    Invoice.create(req.body)
     .then(invoice =>{
-        Client.findById(clientID)
+        Client.findOne({email : invoice.clientEmail})
         .then(client =>{
             const invoiceObj = {
                 userID : userID,
@@ -27,7 +26,7 @@ module.exports = (req , res ,next)=>{
             .then(client =>{
                 res.status = 200
                 res.end()
-                sendInvoiceEmail(invoiceEmailObj)
+                //sendInvoiceEmail(invoiceEmailObj)
             })
         })
     })
