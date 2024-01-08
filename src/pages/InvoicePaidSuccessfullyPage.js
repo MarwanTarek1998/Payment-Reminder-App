@@ -10,7 +10,7 @@ export const InvoicePaidSuccessfullyPage = () => {
   const { invoiceId } = useParams();
 
   useEffect(() => {
-    axios.put("http://localhost:5000/invoices/updateInvoice", {
+    axios.put("http://localhost:5000/invoices/closeInvoice", {
       invoiceId: invoiceId,
       invoiceInfo: {
         state: "Closed",
