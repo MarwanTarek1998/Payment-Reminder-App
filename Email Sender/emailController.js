@@ -30,7 +30,7 @@ Handlebars.registerHelper('link' , function(baseUrl , id , text) {
 
 const sendActivationMail = async (email , userId) => {
 
-    let html = await readFile('F:/Electrical/Node-js/payment-reminder/back-end/Email Templates/Activation_Template.html' , 'utf-8')
+    let html = await readFile('D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Activation_Template.html' , 'utf-8')
 
     let template = Handlebars.compile(html)
 
@@ -55,7 +55,7 @@ const sendActivationMail = async (email , userId) => {
 
 const sendInvoiceEmail = async (invoice) => {
 
-    let html = await readFile("F:/Electrical/Node-js/payment-reminder/back-end/Email Templates/Invoice_Template.html" , 'utf-8')
+    let html = await readFile("D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Invoice_Template.html" , 'utf-8')
 
     let template = Handlebars.compile(html)
 

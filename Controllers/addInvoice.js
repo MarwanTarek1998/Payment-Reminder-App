@@ -27,7 +27,7 @@ module.exports = (req , res ,next)=>{
             .then(client =>{
                 res.status = 200
                 res.end()
-                //sendInvoiceEmail(invoiceEmailObj)
+                sendInvoiceEmail(invoiceEmailObj)
             })
         })
     })
