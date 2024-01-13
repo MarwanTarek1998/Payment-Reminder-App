@@ -38,6 +38,7 @@ export const NavBar = () => {
   const handleLogout = ()=>{
     axios.post("http://localhost:5000/userRegisteration/logout",{}, {withCredentials : true})
     .then(response =>{
+      localStorage.removeItem('token')
       navigate('/')
     })
     .catch(error => console.log({error}))

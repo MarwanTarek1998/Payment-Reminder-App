@@ -12,6 +12,8 @@ import { DashboardPage } from "./pages/DashboardPage";
 import { InvoicesTabs } from "./components/InvoicesTabs";
 import {ReactQueryDevtools} from 'react-query/devtools'
 import { InvoicePaidSuccessfullyPage } from "./pages/InvoicePaidSuccessfullyPage";
+import { ProtectRoute } from "./protectRoute/ProtectRoute";
+
 
 const theme = createTheme({
   palette: {
@@ -43,7 +45,12 @@ function App() {
                 path="/activation-successfully/:userId"
                 element={<ActivationSuccessfullyPage />}
               />
-              <Route path="/dashboard" element={<DashboardPage />}>
+              <Route 
+                path="/dashboard" 
+                element={<ProtectRoute>
+                          <DashboardPage/>
+                        </ProtectRoute>}
+                >
                 <Route path="clinet-invoices/:id" element={<InvoicesTabs />} />
               </Route>
               <Route path="/invoice-paid-successfully/:invoiceId" element={<InvoicePaidSuccessfullyPage />} />

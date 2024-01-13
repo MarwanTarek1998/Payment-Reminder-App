@@ -16,9 +16,15 @@ export const Login = () => {
 
     const navigate = useNavigate()
 
-    const {mutate : loginUser , isSuccess , isError , error} = useLoginUser(()=>{
-        setOpen(true)
-    })
+    const onSuccess = () => {
+        localStorage.setItem('token' , 'test');
+    }
+
+    const onErorr = () => {
+        setOpen(true);
+    }
+
+    const {mutate : loginUser , isSuccess , isError , error} = useLoginUser(onErorr , onSuccess)
 
     const handleSumbit = (event) => {
 

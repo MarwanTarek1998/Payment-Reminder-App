@@ -37,7 +37,6 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm, invoice }) => {
     axios
       .get(`http://localhost:5000/clients/getClientInfo/${id}`)
       .then((response) => {
-        console.log(response);
         setClientEmail(response.data.email);
       });
 
