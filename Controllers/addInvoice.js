@@ -6,7 +6,7 @@ module.exports = (req , res ,next)=>{
     const userID = req.user._id
     const userName = req.user.firstName + " " + req.user.lastName
     
-    Invoice.create(req.body)
+    Invoice.create({...req.body , userName})
     .then(invoice =>{
         Client.findOne({email : invoice.clientEmail})
         .then(client =>{

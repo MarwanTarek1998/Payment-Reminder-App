@@ -6,6 +6,9 @@ const invoiceSchema = new Schema({
         type: String,
         required : true
     },
+    userName:{
+        type: String
+    },
     subject:{
         type: String,
         required : [true , 'Please provide the invoice subject']
