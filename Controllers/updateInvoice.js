@@ -7,8 +7,6 @@ module.exports = (req , res , next) =>{
     .then((invoice) => {
 
         const invoiceEmailObj = {
-            clientEmail : invoice.clientEmail,
-            userName : invoice.userName,
             operation : "edit a ",
             invoiceDetails : invoice
         }

@@ -30,7 +30,7 @@ Handlebars.registerHelper('link' , function(baseUrl , id , text) {
 
 const sendActivationMail = async (email , userId) => {
 
-    let html = await readFile('D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Activation_Template.html' , 'utf-8')
+    let html = await readFile('F:/Electrical/Node-js/payment-reminder/back-end/Email Templates/Activation_Template.html' , 'utf-8')
 
     let template = Handlebars.compile(html)
 
@@ -55,12 +55,12 @@ const sendActivationMail = async (email , userId) => {
 
 const sendInvoiceEmail = async (invoice) => {
 
-    let html = await readFile("D:/VS Code Files/Payment Reminder App/Backend/Email Templates/Invoice_Template.html" , 'utf-8')
+    let html = await readFile("F:/Electrical/Node-js/payment-reminder/back-end/Email Templates/Invoice_Template.html" , 'utf-8')
 
     let template = Handlebars.compile(html)
 
     let data = {
-        userName : invoice.userName , 
+        userName : invoice.invoiceDetails.userName, 
         operation : invoice.operation,
         invoiceSubject : invoice.invoiceDetails.subject,
         invoiceAmount : invoice.invoiceDetails.amount,
@@ -72,7 +72,7 @@ const sendInvoiceEmail = async (invoice) => {
 
     let mailOption = {
         from : process.env.MAIL_USERNAME,
-        to: invoice.clientEmail,
+        to: invoice.invoiceDetails.clientEmail,
         subject: "Payment reminder - A new invoice has been added",
         html: htmlToSend
     }

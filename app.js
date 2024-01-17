@@ -6,6 +6,7 @@ const LocalStrategy = require('passport-local').Strategy
 const cors = require('cors')
 const authenticate = require('./Authentication/PassportAuth.js')
 const checkAuthenticated = require('./Authentication/checkAuthenticated.js')
+const job = require('./Scheduled Tasks/sendReminderEmail.js')
 
 // Configurations
 require('dotenv').config()
@@ -49,3 +50,7 @@ app.use('/invoices' , invoices)
 app.listen(process.env.PORT , () =>{
     console.log(`App is listening to port ${process.env.PORT}`);
 })
+
+
+// Scheduled Tasks
+job;

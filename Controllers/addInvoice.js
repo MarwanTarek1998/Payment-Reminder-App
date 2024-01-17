@@ -16,8 +16,6 @@ module.exports = (req , res ,next)=>{
             }
 
             const invoiceEmailObj = {
-                clientEmail : client.email,
-                userName : userName,
                 operation : "added a new",
                 invoiceDetails : invoice
             }
