@@ -3,6 +3,9 @@ const Handlebars = require('handlebars')
 const { promisify } = require('util');
 const fs = require('fs');
 
+// Configurations
+require('dotenv').config()
+
 const readFile = promisify(fs.readFile);
 
 const transporter = nodemailr.createTransport({
