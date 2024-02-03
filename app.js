@@ -29,7 +29,7 @@ connectToDB(process.env.DBUrl)
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use(cors({
-    origin : 'http://localhost:3000',
+    origin : 'https://payment-reminder-app-frontend.onrender.com',
     credentials: true
 }))
 
