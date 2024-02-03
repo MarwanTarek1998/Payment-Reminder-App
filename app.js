@@ -35,7 +35,11 @@ app.use(cors({
 
 //Middleware
 app.use(session({
-    secret : process.env.SESSION_SECRET
+    secret : process.env.SESSION_SECRET,
+    cookie: {
+        secure: true,
+        sameSite: 'None',
+      }
 }))
 
 app.use(passport.initialize())  // init passport on every route call
