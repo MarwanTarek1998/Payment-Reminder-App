@@ -33,7 +33,7 @@ Handlebars.registerHelper('link' , function(baseUrl , id , text) {
 
 const sendActivationMail = async (email , userId) => {
 
-    let html = await readFile('../Email Templates/Activation_Template.html' , 'utf-8')
+    let html = await readFile('/Email Templates/Activation_Template.html' , 'utf-8')
 
     let template = Handlebars.compile(html)
 
@@ -58,7 +58,7 @@ const sendActivationMail = async (email , userId) => {
 
 const sendInvoiceEmail = async (invoice) => {
 
-    let html = await readFile("../Email Templates/Invoice_Template.html" , 'utf-8')
+    let html = await readFile("/Email Templates/Invoice_Template.html" , 'utf-8')
 
     let template = Handlebars.compile(html)
 
