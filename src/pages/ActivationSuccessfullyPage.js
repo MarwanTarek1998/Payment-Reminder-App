@@ -10,7 +10,7 @@ export const ActivationSuccessfullyPage =  () => {
 
     useEffect(() => {
 
-        axios.post(`http://localhost:5000/userRegisteration/userActivation/${userId}`)
+        axios.post(`https://payment-reminder-app-backend.onrender.com/userRegisteration/userActivation/${userId}`)
 
     } , [])
 

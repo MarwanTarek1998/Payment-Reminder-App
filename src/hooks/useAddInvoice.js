@@ -4,7 +4,7 @@ import { useMutation } from "react-query"
 export const useAddInvoice = (onSuccess)=>{
 
     const addInvoice = (obj) => {
-        return axios.post("http://localhost:5000/invoices/addInvoice", obj ,{withCredentials: true})
+        return axios.post("https://payment-reminder-app-backend.onrender.com/invoices/addInvoice", obj ,{withCredentials: true})
     }
 
     return useMutation(addInvoice , {

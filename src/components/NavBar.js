@@ -36,7 +36,7 @@ export const NavBar = () => {
   };
 
   const handleLogout = ()=>{
-    axios.post("http://localhost:5000/userRegisteration/logout",{}, {withCredentials : true})
+    axios.post("https://payment-reminder-app-backend.onrender.com/userRegisteration/logout",{}, {withCredentials : true})
     .then(response =>{
       localStorage.removeItem('token')
       navigate('/')

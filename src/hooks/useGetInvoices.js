@@ -5,7 +5,7 @@ export const useGetInvoices = (clientID) =>{
 
     const getInvoices = () => {
 
-        return axios.get(`http://localhost:5000/invoices/getInvoices/${clientID}` , {withCredentials: true})
+        return axios.get(`https://payment-reminder-app-backend.onrender.com/invoices/getInvoices/${clientID}` , {withCredentials: true})
     }
 
     return useQuery(['invoices' , clientID] , getInvoices , {

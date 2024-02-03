@@ -5,7 +5,7 @@ export const useAddClient = (onSuccess , onError) => {
 
     const addClient = (client) => {
         
-        return axios.post('http://localhost:5000/clients/addClient' , client , {withCredentials: true}) 
+        return axios.post('https://payment-reminder-app-backend.onrender.com/clients/addClient' , client , {withCredentials: true}) 
     }
 
     return useMutation(addClient , {

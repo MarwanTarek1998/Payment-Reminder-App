@@ -5,7 +5,7 @@ export const useGetClients = () =>{
 
     const getClients = () => {
 
-        return axios.get('http://localhost:5000/clients/getClients' , {withCredentials: true})
+        return axios.get('https://payment-reminder-app-backend.onrender.com/clients/getClients' , {withCredentials: true})
     }
 
     return useQuery('clients' , getClients , {
