@@ -37,6 +37,7 @@ app.use(cors({
 app.use(session({
     secret : process.env.SESSION_SECRET,
     cookie: {
+        secure: true,
         sameSite: 'None',
       }
 }))
