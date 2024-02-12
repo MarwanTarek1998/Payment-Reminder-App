@@ -35,7 +35,7 @@ export const AddInvoiceForm = ({ open, closeInvoiceForm, invoice }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/clients/getClientInfo/${id}`)
+      .get(`https://payment-reminder-app-backend.onrender.com/clients/getClientInfo/${id}`)
       .then((response) => {
         setClientEmail(response.data.email);
       });
