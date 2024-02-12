@@ -22,6 +22,8 @@ const {connectToDB} = require('./Database/DBController.js')
 //create app
 const app = express()
 
+app.set("trust proxy", 1);
+
 //Connect To DB
 connectToDB(process.env.DBUrl)
 
